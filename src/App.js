@@ -1,25 +1,90 @@
-import logo from './logo.svg';
-import './App.css';
+import Rutas from './Rutas/Rutas'
+import NotiContext from './context/NotiContext';
+import UserContext from './context/UserContext';
+import InusualContext from './context/inusualesContext';
+import {BrowserRouter, useRoutes, Route, Switch} from 'react-router-dom'
+import {useEffect,useState} from 'react'
+import servicioUsuario from './services/usuarios'
+import { useNavigate } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+function App () {
+
+  const element = useRoutes(Rutas)
+  const [userContext, setUserContext] = useState()
+  const [notiContext, setUserNotiContext] = useState(0)
+  const [inusualContext, setUsInusualContext] = useState(0)
+  const navigate = useNavigate();
+
+  
+///
+
+useEffect(() => {
+  
+   const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+   if (loggedUserJSON) {
+     const userContext = JSON.parse(loggedUserJSON)
+    console.log(userContext)
+     setUserContext(userContext)
+   
+     servicioUsuario.setToken(userContext.token) 
+    
+
+     /* switch (userContext.nivel) {
+      case 1:navigate('/usuario/menu')
+        
+        break;
+        case 2:navigate('/usuario2/clientes')
+     
+          break;
+          case 3:navigate('/nivel3/')
+     
+        break;
+        case 4: navigate('/legales/menu')
+        
+        break;
+
+     }*/
+   }  else{
+
+      navigate('/login')
+     
+   }  
+  
+
+
+ }, [])
+
+
+ const declarar = async () => {
+
+  const cantNoti ={
+    cantidad: 8}
+   setUserNotiContext(cantNoti)
+
 }
 
-export default App;
+///
+  
+
+    return(
+
+      
+ 
+ 
+
+  
+    {element}
+
+)
+
+ 
+
+}
+
+
+export default () =>
+ <BrowserRouter>
+  <App />
+
+ </BrowserRouter>
