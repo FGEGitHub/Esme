@@ -1,4 +1,4 @@
-import servicioEsme from '../../../services/esme'
+import servicioEsme from '../../services/esme'
 import React, { useEffect, useState, Fragment } from "react";
 import { useParams } from "react-router-dom"
 import MUIDataTable from "mui-datatables";

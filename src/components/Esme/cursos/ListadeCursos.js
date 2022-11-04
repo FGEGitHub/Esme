@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import servicioEsme from '../../../services/esme'
+import servicioEsme from '../../services/esme'
 import DownloadIcon from '@mui/icons-material/Download';
 import { useNavigate } from "react-router-dom";
 import Tooltip from '@material-ui/core/Tooltip';

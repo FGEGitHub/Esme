@@ -1,9 +1,9 @@
 import axios from "axios"
 
 
-//const baseUrl = 'https://api.santacatalinafideicomiso.com/esme/'
+const baseUrl = 'https://api.santacatalinafideicomiso.com/esme/'
 
-const  baseUrl = 'http://localhost:4000/esme/'
+//const  baseUrl = 'http://localhost:4000/esme/'
 
 
 
