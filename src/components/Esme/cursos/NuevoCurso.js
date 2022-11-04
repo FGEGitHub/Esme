@@ -80,7 +80,7 @@ export default function ClienteNuevo(props) {
             autoFocus
             margin="dense"
             id="name"
-            label="Domicilio"
+            label="Profesor"
             name="profesor"
             onChange={handleChange}
             fullWidth

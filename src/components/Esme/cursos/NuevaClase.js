@@ -32,8 +32,8 @@ export default function ClaseNueva (props) {
     event.preventDefault();
     try {
 
-      await servicioEsme.nuevaClase(form)
- 
+     const rta = await servicioEsme.nuevaClase(form)
+      alert(rta)
      
      } catch (error) {
        console.error(error);

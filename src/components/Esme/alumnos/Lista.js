@@ -25,8 +25,9 @@ const TablaAlumnos = (props) => {
     const traer = async () => {
         try {
      
-            
-              const lotes  = await servicioEsme.almumnos()
+               
+              const lotes  = await servicioEsme.alumnos()
+              console.log(lotes)
               setAlumnos(lotes)
              
           
@@ -47,7 +48,9 @@ const TablaAlumnos = (props) => {
         return (
           <>
     <div>
-            < EditIcon/>
+            < EditIcon
+            onClick={() =>  navigate('/esme/alumno/'+alumnos[dataIndex].id)}
+            />
          
             </div>
           </>
@@ -62,16 +65,25 @@ const TablaAlumnos = (props) => {
 
         },
         {
-            name: "fecha",
-            label: "fecha",
+            name: "nombre",
+            label: "nombre",
         },
        
         {
-            name: "tema",
-            label:"tema",
+            name: "apellido",
+            label:"Apellido",
            
         },
-    
+        {
+            name: "tel",
+            label:"Telefono",
+           
+        },
+        {
+            name: "mail",
+            label:"mail",
+           
+        },
         {
             name: "Ver/Contestar",
             options: {

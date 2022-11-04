@@ -30,8 +30,9 @@ export default function ClienteNuevo(props) {
     event.preventDefault();
     try {
 
-      await servicioEsme.nuevoCurso(form)
- 
+     const
+      rta = await servicioEsme.nuevoAlumno(form)
+      alert(rta)
      
      } catch (error) {
        console.error(error);
@@ -52,13 +53,13 @@ export default function ClienteNuevo(props) {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-       Nuevo Curso<PersonAddAlt1Icon/>
+       Nuevo Alumno<PersonAddAlt1Icon/>
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Nuevo Curso </DialogTitle>
+        <DialogTitle>Nuevo Alumno</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Ingrese Datos del Nuevo Cliente
+            Ingrese Datos del Nuevo Alumno
           </DialogContentText>
           <form  onSubmit={handleDeterminar}> 
           <InputLabel  variant="standard" htmlFor="uncontrolled-native">
@@ -80,8 +81,38 @@ export default function ClienteNuevo(props) {
             autoFocus
             margin="dense"
             id="name"
-            label="Domicilio"
-            name="profesor"
+            label="Apellido"
+            name="apellido"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          />
+               <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Dni"
+            name="dni"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          />
+                  <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Telefono"
+            name="tel"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          />
+               <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="mail"
+            name="mail"
             onChange={handleChange}
             fullWidth
             variant="standard"
@@ -99,7 +130,7 @@ export default function ClienteNuevo(props) {
              
       
           <DialogActions>
-          {form.nombre && form.profesor  ? <><Button  type="submit">Enviar</Button></> : <><h6  style={{color: "red"}} >Completar todos los campos</h6><Button  type="submit" disabled>Enviar</Button></> } 
+          {form.nombre && form.apellido && form.dni && form.mail && form.tel    ? <><Button  type="submit">Enviar</Button></> : <><h6  style={{color: "red"}} >Completar todos los campos</h6><Button  type="submit" disabled>Enviar</Button></> } 
           <Button onClick={handleClose}>Cancelar</Button>
          
          

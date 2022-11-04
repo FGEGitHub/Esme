@@ -16,6 +16,16 @@ const listaCursos = async () => {
     return data
   
   }
+
+  
+const alumno = async (id) => {
+ 
+  const { data } = await axios.get(baseUrl +'alumno/'+id)
+  console.log(data)
+  return data
+
+}
+
   const clases = async (id) => {
  
     const { data } = await axios.get(baseUrl +'clases/'+id)
@@ -25,9 +35,9 @@ const listaCursos = async () => {
   }
 
   const alumnos = async () => {
- 
+   
     const { data } = await axios.get(baseUrl +'alumnos/')
-    console.log(data)
+    
     return data
   
   }
@@ -36,14 +46,24 @@ const listaCursos = async () => {
 
     const { data } = await axios.post(baseUrl +'nuevocurso/', form)
     return data
-  
+   
   }
   const nuevaClase = async (form) => {
 
     const { data } = await axios.post(baseUrl +'nuevaclase/', form)
+ 
+    return data 
+  
+  
+  }
+
+  const nuevoAlumno = async (form) => {
+
+    const { data } = await axios.post(baseUrl +'nuevoalumno/', form)
+    
     return data
   
   }
   
 
-export default { alumnos, listaCursos,nuevoCurso,clases,nuevaClase};
+export default { alumnos,alumno,nuevoAlumno, listaCursos,nuevoCurso,clases,nuevaClase};
