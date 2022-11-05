@@ -231,13 +231,9 @@ const FichaAxios = (props) => {
                     </div>
                   ) : (
                     <div className="profile-edit-button">
-                      <Button
-                        variant="outlined"
-                        onClick={() => navigate('/usuario2/legajoscliente/'+props.cuil_cuit)}
-                      >
-                      Ir a legajos
-                      </Button>
-                      <ModalAgregarCurso/>
+                    
+                      <ModalAgregarCurso
+                      id = {id}/>
                      
                     </div>
                   )}

@@ -5,14 +5,15 @@ import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import PersonOffOutlinedIcon from '@mui/icons-material/PersonOffOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import Tooltip from '@material-ui/core/Tooltip';
 import Nuevo from './NuevaClase'
 
-const TablaNotificaciones = (props) => {
+const TablaNotificaciones = () => {
     let params = useParams()
     let id = params.id
-    const [clases, setClases] = useState([''])
+    const [alumnos, setAlumnos] = useState([''])
     const [clase, setClase] = useState([])
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
@@ -28,9 +29,8 @@ const TablaNotificaciones = (props) => {
         try {
      
             
-              const lotes  = await servicioEsme.clases(id)
-              setClases(lotes[0])
-              setClase(lotes[1][0])
+              const lotes  = await servicioEsme.alumnosdelcursoclase(id)
+              setAlumnos(lotes)            
           
           
            
@@ -44,36 +44,91 @@ const TablaNotificaciones = (props) => {
 
 
     }
+    const ponerpresente = async (index) => {
+        console.log(id)
+        const mandar= {
+           id_alumno: alumnos[index].id_alumno,
+            id_clase: id
+        }
+    await servicioEsme.ponerpresente(mandar)
+    traer()
+ 
+    } 
+    const ponerausente = async (index) => {
+        console.log(id)
+        const mandar= {
+           id_alumno: alumnos[index].id_alumno,
+            id_clase: id
+        }
+    await servicioEsme.ponerausente(mandar)
+    traer()
+ 
+    } 
+    
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
     <div>
-            < EditIcon
-             onClick={() => navigate('/esme/asistencia/'+clases[dataIndex].id)}
-            />
-         
+    <Tooltip title="Presente" arrow>
+    < PersonOutlineOutlinedIcon
+     onClick={() =>  {ponerpresente(dataIndex) }} />
+    </Tooltip>
+    <Tooltip title="Ausente" arrow>
+    < PersonOffOutlinedIcon
+      onClick={() =>  {ponerausente(dataIndex) }}  />
+    </Tooltip>
+   
             </div>
           </>
         );
       }
     // definimos las columnas
+
+    function present(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+    <div>
+           
+            { alumnos[dataIndex].otroo === null ? <>sin def</>:<>{alumnos[dataIndex].otroo} </> }
+            </div>
+          </>
+        );
+      }
    
     const columns = [
-     
         {
-            name: "fecha",
-            label: "fecha",
+            name: "nombre",
+            label: "nombre",
+
+        },
+        {
+            name: "apellido",
+            label: "apellido",
         },
        
         {
-            name: "tema",
-            label:"tema",
+            name: "dni",
+            label:"dni",
            
         },
-    
+        
+       
         {
-            name: "Ver",
+            name: "Asistencia",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                present(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },   
+        {
+            name: "Presente/Ausente",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -84,9 +139,7 @@ const TablaNotificaciones = (props) => {
                     )
             }
         
-        },   
- 
-
+        },  
     ];
 
 const options = {
@@ -99,23 +152,13 @@ const options = {
 // renderiza la data table
 return (
     <div>
-        <>
-        <Nuevo
-    traer =  { async () => {
-        const lotes  = await servicioEsme.clases(id)
-              setClases(lotes[0])
-              setClase([lotes[1][0]])
-    }}
-    clase={clase}
- 
-    />
-    </>
+   
    <h2>  {clase ? <>{clase.nombre}</>:<>etc</>}</h2>
    
         <MUIDataTable
         
-            title={'Clases'}
-            data={clases}
+            title={'Asistencia'}
+            data={alumnos}
             columns={columns}
             actions={[
                 {

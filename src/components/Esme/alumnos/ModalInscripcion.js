@@ -48,8 +48,19 @@ export default function Modal(props) {
 
   }
   
+  const Seleccionar = async () => {
+  
+  
+
+    const rta = await servicioEsme.asignarcurso(pago)
+  
+    alert(rta)
+    setOpen(false);
 
 
+
+  }
+  
 
   const handleClickOpen = () => {
     traer()
@@ -63,7 +74,7 @@ export default function Modal(props) {
 
   const handleChange = (e) => {
 
-    console.log(pago)
+ 
 
     // setPago({ ...pago, ['id']: props.id })
     setPago({ ...pago, [e.target.name]: e.target.value })
@@ -107,7 +118,7 @@ export default function Modal(props) {
 
       <Button variant="outlined" onClick={handleClickOpen}>
 
-        Subir comprobante Zona {props.zona} Fraccion {props.fraccion} Manzana{props.manzana} {props.zona === 'PIT' ? <>Parcela {props.parcela} </> : <>Lote {props.lote} </> } 
+      Inscribir a un curso  
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
@@ -162,34 +173,19 @@ export default function Modal(props) {
             </div>
 
 
-
-
-
-
-
             <br />
 
-            <Box
-              component="form"
-              sx={{
-                '& > :not(style)': { m: 1, width: '25ch' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField onChange={handleChange}
-                id="filled-basic"
-                label="Monto"
-                name="monto"
-                variant="filled"
-                type="number" />
-            </Box>
+           
+           
         
 
 
             
 
-          
+            <Button variant="outlined" onClick={Seleccionar}>
+              Inscribir
+
+            </Button>
 
 
           </div>

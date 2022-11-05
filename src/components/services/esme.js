@@ -8,7 +8,6 @@ const baseUrl = 'https://api.santacatalinafideicomiso.com/esme/'
 
 
 
-
 const listaCursos = async () => {
  
     const { data } = await axios.get(baseUrl +'listacursos/')
@@ -25,6 +24,22 @@ const alumno = async (id) => {
   return data
 
 }
+  
+const alumnosdelcurso = async (id) => {
+ 
+  const { data } = await axios.get(baseUrl +'alumnosdelcurso/'+id)
+  console.log(data)
+  return data
+
+}
+const alumnosdelcursoclase = async (id) => {
+ 
+  const { data } = await axios.get(baseUrl +'alumnosdelcursoclase/'+id)
+  console.log(data)
+  return data
+
+}
+
 
   const clases = async (id) => {
  
@@ -64,6 +79,25 @@ const alumno = async (id) => {
     return data
   
   }
-  
+  const asignarcurso = async (form) => {
 
-export default { alumnos,alumno,nuevoAlumno, listaCursos,nuevoCurso,clases,nuevaClase};
+    const { data } = await axios.post(baseUrl +'asignarcurso/', form)
+    
+    return data
+  
+  }
+  const ponerpresente = async (form) => {
+
+    const { data } = await axios.post(baseUrl +'ponerpresente/', form)
+    
+    return data
+  
+  }
+  const ponerausente = async (form) => {
+
+    const { data } = await axios.post(baseUrl +'ponerausente/', form)
+    
+    return data
+  
+  }
+export default { ponerausente,ponerpresente,alumnosdelcursoclase,alumnos,alumno,nuevoAlumno,alumnosdelcurso, asignarcurso,listaCursos,nuevoCurso,clases,nuevaClase};

@@ -9,10 +9,10 @@ import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
 import Tooltip from '@material-ui/core/Tooltip';
 import Nuevo from './NuevaClase'
 
-const TablaNotificaciones = (props) => {
+const TablaNotificaciones = () => {
     let params = useParams()
     let id = params.id
-    const [clases, setClases] = useState([''])
+    const [alumnos, setAlumnos] = useState([''])
     const [clase, setClase] = useState([])
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
@@ -28,9 +28,8 @@ const TablaNotificaciones = (props) => {
         try {
      
             
-              const lotes  = await servicioEsme.clases(id)
-              setClases(lotes[0])
-              setClase(lotes[1][0])
+              const lotes  = await servicioEsme.alumnosdelcurso(id)
+              setAlumnos(lotes)            
           
           
            
@@ -49,9 +48,7 @@ const TablaNotificaciones = (props) => {
         return (
           <>
     <div>
-            < EditIcon
-             onClick={() => navigate('/esme/asistencia/'+clases[dataIndex].id)}
-            />
+            < EditIcon/>
          
             </div>
           </>
@@ -60,20 +57,24 @@ const TablaNotificaciones = (props) => {
     // definimos las columnas
    
     const columns = [
-     
         {
-            name: "fecha",
-            label: "fecha",
+            name: "nombre",
+            label: "nombre",
+
+        },
+        {
+            name: "apellido",
+            label: "apellido",
         },
        
         {
-            name: "tema",
-            label:"tema",
+            name: "dni",
+            label:"dni",
            
         },
     
         {
-            name: "Ver",
+            name: "Ver/Contestar",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -99,23 +100,13 @@ const options = {
 // renderiza la data table
 return (
     <div>
-        <>
-        <Nuevo
-    traer =  { async () => {
-        const lotes  = await servicioEsme.clases(id)
-              setClases(lotes[0])
-              setClase([lotes[1][0]])
-    }}
-    clase={clase}
- 
-    />
-    </>
+   
    <h2>  {clase ? <>{clase.nombre}</>:<>etc</>}</h2>
    
         <MUIDataTable
         
-            title={'Clases'}
-            data={clases}
+            title={'Alumnos del curso'}
+            data={alumnos}
             columns={columns}
             actions={[
                 {
