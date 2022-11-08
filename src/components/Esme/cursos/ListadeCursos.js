@@ -14,6 +14,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Nuevo from './NuevoCurso'
 import PageviewIcon from '@mui/icons-material/Pageview';
+import BorrarCurso from './ModalBorrarSeguro'
 const TablaCursos = () => {
     //configuracion de Hooks
     const navigate = useNavigate();
@@ -49,6 +50,17 @@ const TablaCursos = () => {
             <Tooltip title="Ir al curso" arrow>
               <PageviewIcon
                 onClick={() => navigate('/esme/curso/'+cursos[index].id)}
+              />
+    
+            </Tooltip>
+            <Tooltip title="Borrar" arrow>
+              <BorrarCurso
+               id = {cursos[index].id}
+               getClients =  { async () => {
+                const clients = await servicioEsme.listaCursos({
+                })
+                setCursos(clients)
+            }}
               />
     
             </Tooltip>

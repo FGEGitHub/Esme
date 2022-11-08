@@ -1,9 +1,9 @@
 import axios from "axios"
 
 
-const baseUrl = 'https://api.santacatalinafideicomiso.com/esme/'
+//const baseUrl = 'https://api.santacatalinafideicomiso.com/esme/'
 
-//const  baseUrl = 'http://localhost:4000/esme/'
+const  baseUrl = 'http://localhost:4000/esme/'
 
 
 
@@ -100,4 +100,22 @@ const alumnosdelcursoclase = async (id) => {
     return data
   
   }
-export default { ponerausente,ponerpresente,alumnosdelcursoclase,alumnos,alumno,nuevoAlumno,alumnosdelcurso, asignarcurso,listaCursos,nuevoCurso,clases,nuevaClase};
+
+  const borrarcurso = async (id) => {
+
+    const { data } = await axios.get(baseUrl +'borrarcurso/'+ id)
+    
+    return data
+  
+  }
+
+
+  const borrarclase = async (id) => {
+
+    const { data } = await axios.get(baseUrl +'borrarclase/'+ id)
+    
+    return data
+  
+  }
+  
+export default {borrarcurso, borrarclase,ponerausente,ponerpresente,alumnosdelcursoclase,alumnos,alumno,nuevoAlumno,alumnosdelcurso, asignarcurso,listaCursos,nuevoCurso,clases,nuevaClase};

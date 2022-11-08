@@ -47,8 +47,8 @@ const TablaNotificaciones = () => {
     const ponerpresente = async (index) => {
         console.log(id)
         const mandar= {
-           id_alumno: alumnos[index].id_alumno,
-            id_clase: id
+           id_alumnoo: alumnos[index].id_alumno,
+            id_clasee: id
         }
     await servicioEsme.ponerpresente(mandar)
     traer()
@@ -57,8 +57,8 @@ const TablaNotificaciones = () => {
     const ponerausente = async (index) => {
         console.log(id)
         const mandar= {
-           id_alumno: alumnos[index].id_alumno,
-            id_clase: id
+           id_alumnoo: alumnos[index].id_alumno,
+            id_clasee: id
         }
     await servicioEsme.ponerausente(mandar)
     traer()

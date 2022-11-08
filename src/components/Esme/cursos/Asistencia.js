@@ -8,6 +8,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
 import Tooltip from '@material-ui/core/Tooltip';
 import Nuevo from './NuevaClase'
+import BorrarClase from './ModalBorrarClase'
 
 const TablaNotificaciones = (props) => {
     let params = useParams()
@@ -51,6 +52,14 @@ const TablaNotificaciones = (props) => {
     <div>
             < EditIcon
              onClick={() => navigate('/esme/asistencia/'+clases[dataIndex].id)}
+            />
+            < BorrarClase
+                 id = {clases[dataIndex].id}
+                 traer =  { async () => {
+                    const lotes  = await servicioEsme.clases(id)
+                          setClases(lotes[0])
+                          setClase([lotes[1][0]])
+                }}
             />
          
             </div>
